@@ -1,5 +1,5 @@
-# Use Node.js v14
-FROM node:14
+# Use Node.js v21 with Alpine 3.19
+FROM node:21-alpine
 
 # Create app directory
 WORKDIR /usr/src/app
