@@ -14,7 +14,13 @@ app.get('/test', (req, res) => {
   );
 });
 
+app.get('/secret', (req, res) => {
+  res.json(
+    {secretMsg:`${process.env.TEST_ENV_VAR}`}
+  );
+});
+
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
-  console.log(`test env var = ${process.env.TEST_ENV_VAR}`);
+  //console.log(`test env var = ${process.env.TEST_ENV_VAR}`);
 });
