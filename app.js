@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
 
 app.get('/test', (req, res) => {
   res.json(
-    {id:1, msg:"just a test", isMember:true}
+    {id:12, msg:"just testing", isMember:false}
   );
 });
 
