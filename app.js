@@ -2,6 +2,21 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
+let db = [
+  {
+    id:1,
+    min: 50,
+    max: 100,
+    prequal: true
+  },
+  {
+    id:2,
+    min: 50,
+    max: 400,
+    prequal: true
+  }
+];
+
 app.get('/', (req, res) => {
   res.send(`JUST TESTING`);
 });
