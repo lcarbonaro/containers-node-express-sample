@@ -33,9 +33,13 @@ app.get('/secret', (req, res) => {
   );
 });
 
-app.get('/api/merchant/:id', nocache, (req, res) => {
+app.get('/api/merchant/:id', (req, res) => {
   let id = parseInt(req.params.id,10);
   let r = db.filter( r => r.id === id );
+  
+  // so we get 200 each time not 304
+  res.header('Cache-Control', 'no-cache');
+
   if( r.length > 0) {
     res.status(200).json(r[0]);
   } else {
@@ -53,9 +57,3 @@ app.listen(port, () => {
   //console.log(`test env var = ${process.env.TEST_ENV_VAR}`);
 });
 
-function nocache(req, res, next) {
-  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-  res.header('Expires', '-1');
-  res.header('Pragma', 'no-cache');
-  next();
-}
