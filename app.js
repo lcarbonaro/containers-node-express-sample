@@ -34,7 +34,7 @@ app.get('/secret', (req, res) => {
 });
 
 app.get('/api/merchant/:id', (req, res) => {
-  let r = db.filter( r => r.id === req.params.id)[0];
+  let r = db.filter( r => r.id === parseInt(req.params.id,10) )[0];
   res.json(r);
 });
 
