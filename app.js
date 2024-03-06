@@ -33,6 +33,11 @@ app.get('/secret', (req, res) => {
   );
 });
 
+app.get('/api/merchant/:id', (req, res) => {
+  let r = db.filter( r => r.id === req.params.id)[0];
+  res.json(r);
+});
+
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
   //console.log(`test env var = ${process.env.TEST_ENV_VAR}`);
