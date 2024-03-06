@@ -34,8 +34,18 @@ app.get('/secret', (req, res) => {
 });
 
 app.get('/api/merchant/:id', (req, res) => {
-  let r = db.filter( r => r.id === parseInt(req.params.id,10) )[0];
-  res.json(r);
+  let id = parseInt(req.params.id,10);
+  let r = db.filter( r => r.id === id );
+  if( r.length > 0) {
+    res.status(200).json(r[0]);
+  } else {
+    res.status(400).json({ message: `id ${id} not found`});
+  }
+  
+});
+
+app.post('/api/merchant', (req,res) => {
+
 });
 
 app.listen(port, () => {
