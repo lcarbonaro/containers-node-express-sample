@@ -33,7 +33,7 @@ app.get('/secret', (req, res) => {
   );
 });
 
-app.get('/api/merchant/:id', (req, res) => {
+app.get('/api/merchant/:id', nocache, (req, res) => {
   let id = parseInt(req.params.id,10);
   let r = db.filter( r => r.id === id );
   if( r.length > 0) {
@@ -52,3 +52,10 @@ app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
   //console.log(`test env var = ${process.env.TEST_ENV_VAR}`);
 });
+
+function nocache(req, res, next) {
+  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+  res.header('Expires', '-1');
+  res.header('Pragma', 'no-cache');
+  next();
+}
