@@ -40,7 +40,7 @@ app.get('/api/merchant/:id', (req, res) => {
   let r = db.filter( r => r.id === id );
   
   // so we get 200 each time not 304 
-  res.header('Cache-Control', 'no-cache');
+  //res.header('Cache-Control', 'no-cache');
 
   if( r.length > 0) {
     res.status(200).json(r[0]);
