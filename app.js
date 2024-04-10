@@ -2,8 +2,10 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
+/* did not work here either :(
 const Nightmare = require("nightmare");
 const nightmare = Nightmare({ show: false });
+*/
 
 app.disable('etag');
 
@@ -22,8 +24,9 @@ let db = [
   }
 ];
 
-app.get('/focl', (req, res) => {
-  
+
+/* did not work here either :(
+app.get('/focl', (req, res) => {  
   nightmare
     .goto("https://toronto.craigslist.org/search/mss/zip")
     .wait(".cl-search-result")
@@ -55,6 +58,8 @@ app.get('/focl', (req, res) => {
     });
 
 });
+*/
+
 
 app.get('/', (req, res) => {
   res.send(`JUST TESTING`);
