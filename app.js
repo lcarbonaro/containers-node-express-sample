@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
+const Nightmare = require("nightmare");
+const nightmare = Nightmare({ show: false });
+
 app.disable('etag');
 
 let db = [ 
@@ -18,6 +21,40 @@ let db = [
     prequal: true
   }
 ];
+
+app.get('/focl', (req, res) => {
+  
+  nightmare
+    .goto("https://toronto.craigslist.org/search/mss/zip")
+    .wait(".cl-search-result")
+    .evaluate(() => {
+        const elements = document.querySelectorAll("li.cl-search-result");
+
+        let responseObj = [];
+
+        elements.forEach( elem => {
+            let rec = {};
+                        
+            let aTag = elem.querySelector('a.main'); 
+            rec.title = elem.title; 
+            rec.link = aTag.href.trim();   
+
+            responseObj.push(rec);
+        });
+
+        return responseObj;
+    })
+    .end()
+    .then((result) => {
+        //console.log('dot then');
+        //console.log(result);
+        res.json( { result } );
+    })
+    .catch((error) => {
+        console.error("Scraping failed:", error);
+    });
+
+});
 
 app.get('/', (req, res) => {
   res.send(`JUST TESTING`);
